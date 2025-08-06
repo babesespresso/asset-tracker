@@ -1,46 +1,229 @@
-# Getting Started with Create React App
+# Asset Tracker Admin Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive asset management system with a modern React frontend and Node.js backend.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Asset Management**: Track, manage, and monitor all company assets
+- **User Management**: Role-based access control with admin, manager, and user roles
+- **Reporting**: Generate detailed reports on assets, maintenance, and depreciation
+- **Audit Trail**: Complete logging of all system activities
+- **Settings**: Configurable system settings and preferences
+- **File Upload**: Support for asset images and documents
+- **Real-time Updates**: Live dashboard with key metrics
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend
+- React 18 with TypeScript
+- Redux Toolkit for state management
+- Material-UI for components
+- Axios for API calls
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Backend
+- Node.js with Express
+- MongoDB with Mongoose
+- JWT authentication
+- Multer for file uploads
+- Helmet for security
+- Rate limiting
 
-### `npm test`
+## Quick Start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or cloud)
+- npm or yarn
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd asset-tracker
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install frontend dependencies**
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Install backend dependencies**
+```bash
+cd backend
+npm install
+```
 
-### `npm run eject`
+4. **Set up environment variables**
+Create a `.env` file in the backend directory:
+```bash
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/asset-tracker
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRE=7d
+NODE_ENV=development
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+5. **Start MongoDB**
+Make sure MongoDB is running on your system.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. **Seed the database**
+```bash
+cd backend
+npm run seed
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+7. **Start the backend server**
+```bash
+npm run dev
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+8. **Start the frontend**
+In a new terminal:
+```bash
+npm start
+```
 
-## Learn More
+## Default Login Credentials
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After seeding the database, you can use these credentials:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Admin**: admin@assettracker.com / admin123
+- **Manager**: manager@assettracker.com / manager123
+- **User**: user@assettracker.com / user123
+
+## API Endpoints
+
+### Authentication
+- POST `/api/auth/login` - User login
+- POST `/api/auth/register` - User registration
+- POST `/api/auth/logout` - User logout
+- GET `/api/auth/me` - Get current user
+- PUT `/api/auth/updatepassword` - Update password
+
+### Assets
+- GET `/api/assets` - Get all assets
+- POST `/api/assets` - Create new asset
+- GET `/api/assets/:id` - Get single asset
+- PUT `/api/assets/:id` - Update asset
+- DELETE `/api/assets/:id` - Delete asset
+- POST `/api/assets/:id/assign` - Assign asset to user
+- POST `/api/assets/:id/unassign` - Unassign asset
+- GET `/api/assets/stats` - Get asset statistics
+
+### Users
+- GET `/api/users` - Get all users
+- POST `/api/users` - Create new user
+- GET `/api/users/:id` - Get single user
+- PUT `/api/users/:id` - Update user
+- DELETE `/api/users/:id` - Deactivate user
+
+### Reports
+- GET `/api/reports` - Get all reports
+- POST `/api/reports` - Generate new report
+- GET `/api/reports/:id` - Get single report
+- DELETE `/api/reports/:id` - Delete report
+
+### Settings
+- GET `/api/settings` - Get all settings
+- POST `/api/settings` - Create new setting
+- GET `/api/settings/:key` - Get single setting
+- PUT `/api/settings/:key` - Update setting
+- DELETE `/api/settings/:key` - Delete setting
+
+### Dashboard
+- GET `/api/dashboard/stats` - Get dashboard statistics
+
+### Audit
+- GET `/api/audit` - Get audit logs
+
+## File Structure
+
+```
+asset-tracker/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── server.js
+│   ├── uploads/
+│   └── package.json
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── store/
+│   ├── theme/
+│   └── App.tsx
+├── public/
+└── package.json
+```
+
+## Development
+
+### Backend Development
+```bash
+cd backend
+npm run dev  # Start with nodemon
+```
+
+### Frontend Development
+```bash
+npm start  # Start React development server
+```
+
+### Database Management
+```bash
+# Seed database with sample data
+cd backend
+npm run seed
+
+# Reset database
+npm run seed
+```
+
+## Production Deployment
+
+### Environment Variables for Production
+```bash
+PORT=5000
+MONGODB_URI=your-mongodb-connection-string
+JWT_SECRET=your-production-jwt-secret
+NODE_ENV=production
+```
+
+### Build Commands
+```bash
+# Build frontend
+npm run build
+
+# Start backend in production
+cd backend
+npm start
+```
+
+## Security Features
+
+- JWT-based authentication
+- Password hashing with bcrypt
+- Rate limiting
+- CORS protection
+- Input validation
+- Role-based access control
+- Audit logging
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
